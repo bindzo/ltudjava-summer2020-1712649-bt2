@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate
+Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class catalog="sinhvien"
+name="baitap2.SinhVien" table="sinhvien">
+<id name="MSSV" type="number">
+<column length="7" name="MSSV"/>
+<generator class="assigned"/>
+</id>
+<property name="TEN" type="string">
+<column length="50" name="TEN"/>
+</property>
+<property name="GIOITINH" type="string">
+<column length="10"name="GIOITINH"/>
+</property>
+<property name="diaChi" type="string">
+<column length="45" name="DiaChi"/>
+</property>
+<property name="CMND" type="number">
+<column length="45" name="CMND"/>
+</property>
+<property name="USERNAME" type="string">
+<column length="45" name="USERNAME"/>
+</property>
+<property name="PASSWORD" type="string">
+<column length="45" name="PASSWORD"/>
+</property>
+</class>
+</hibernate-mapping>
