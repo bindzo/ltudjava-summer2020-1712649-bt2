@@ -6,7 +6,7 @@ public class SinhVien {
 	private String gioitinh;
 	private int cmnd;
 	private String lop;
-	private String usename;
+	private String username;
 	private String password;
 	
 	public SinhVien(int mssv, String hoten, String gioitinh, int cmnd, String lop, String usename, String password) {
@@ -16,8 +16,11 @@ public class SinhVien {
 		this.gioitinh = gioitinh;
 		this.cmnd = cmnd;
 		this.lop = lop;
-		this.usename = usename;
+		this.username = usename;
 		this.password = password;
+	}
+	public SinhVien() {
+		super();
 	}
 	public String getLop() {
 		return lop;
@@ -25,11 +28,11 @@ public class SinhVien {
 	public void setLop(String lop) {
 		this.lop = lop;
 	}
-	public String getUsename() {
-		return usename;
+	public String getUsername() {
+		return username;
 	}
-	public void setUsename(String usename) {
-		this.usename = usename;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getPassword() {
 		return password;

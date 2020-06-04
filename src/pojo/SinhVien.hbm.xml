@@ -3,28 +3,28 @@
 Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-<class catalog="sinhvien"
-name="baitap2.SinhVien" table="sinhvien">
-<id name="MSSV" type="number">
+<class catalog="sinhviendb"
+name="pojo.SinhVien" table="sinhvien">
+<id name="mssv" type="int">
 <column length="7" name="MSSV"/>
 <generator class="assigned"/>
 </id>
-<property name="TEN" type="string">
+<property name="hoten" type="string">
 <column length="50" name="TEN"/>
 </property>
-<property name="GIOITINH" type="string">
-<column length="10"name="GIOITINH"/>
+<property name="gioitinh" type="string">
+<column length="10" name="GIOITINH"/>
 </property>
-<property name="diaChi" type="string">
-<column length="45" name="DiaChi"/>
+<property name="lop" type="string">
+<column length="45" name="LOP"/>
 </property>
-<property name="CMND" type="number">
+<property name="cmnd" type="int">
 <column length="45" name="CMND"/>
 </property>
-<property name="USERNAME" type="string">
+<property name="username" type="string">
 <column length="45" name="USERNAME"/>
 </property>
-<property name="PASSWORD" type="string">
+<property name="password" type="string">
 <column length="45" name="PASSWORD"/>
 </property>
 </class>
