@@ -28,35 +28,28 @@ public class SinhVienDAO {
 	}
 
 	public static void main(String[] args) {
-//		List<String> filenames = new LinkedList<String>();
-//		final File folder = new File("data/lop");
-//		listFilesForFolder(folder, filenames);
-//		List<SinhVien> sinhVienList = null;
-//		for (int i = 0; i < filenames.size(); i++) {
-//			System.out.println(filenames.get(i));
-//			sinhVienList = readFromCSV("data/lop/" + filenames.get(i));
-//			for (int j = 0; j < sinhVienList.size(); j++) {
-//				System.out.println(sinhVienList.get(j).getMssv());
-//			}
-//		}
-		SinhVien sv = SinhVienDAO.layThongTinSinhVien(234);
-		if (sv != null) {
-			System.out.println("MSSV: " + sv.getMssv());
-			System.out.println("Họ và tên: " + sv.getHoten());
-
-		} else {
-			System.out.println("Sinh viên 1 không tồn tại");
-		}
-//		SinhVien addsv = new SinhVien(234,"Phạm Văn B","Nam",534,"17CTT",null,null);
-//		System.out.println(addsv.getLop());
-//		boolean kq = SinhVienDAO.themSinhVien(addsv);
-//		if (kq == true) {
-//			System.out.println("Thêm thành công");
-//		} else {
-//			System.out.println("Thêm thất bại");
-//		}
+		fromCSVToDatabase_lop();
 	}
-	public static void fromCSVtoDatabase() {
+	public static void fromCSVToDatabase_lop() {
+		int count = 0;
+		List<String> filenames = new LinkedList<String>();
+		final File folder = new File("data/lop");
+		listFilesForFolder(folder, filenames);
+		List<SinhVien> sinhVienList = null;
+		boolean kq = true;
+		for (int i = 0; i < filenames.size(); i++) {
+			sinhVienList = readFromCSV("data/lop/" + filenames.get(i));
+			for (int j = 0; j < sinhVienList.size(); j++) {
+				kq = SinhVienDAO.themSinhVien(sinhVienList.get(j));
+				if(kq)
+				{
+					count++;
+				}
+			}
+			System.out.println("Thêm thành công "+ count + " sinh viên của lớp "+ filenames.get(i));
+			count = 0;
+		}
+		
 		
 	}
 	public static List<SinhVien> readFromCSV(String csvFile) {
