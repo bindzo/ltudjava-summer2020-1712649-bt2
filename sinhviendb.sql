@@ -5,7 +5,7 @@ create table SINHVIEN (
    TEN varchar(50),
    GIOITINH varchar(10),
    CMND bigint,
-   LOP varchar(20),
+   MALOP varchar(20),
 	USERNAME varchar(50),
    PASS varchar(50),
    primary key (MSSV),
@@ -20,7 +20,6 @@ create table MONHOC (
 );
 create table LOP (
    MALOP varchar(20) not null,
-   CMND int,
    primary key (MALOP),
    unique (MALOP)
 );
@@ -29,10 +28,10 @@ create table GIANGKHOA (
    MAMON varchar(20) not null,
    PRIMARY KEY(MALOP,MAMON)
 );
-ALTER TABLE SINHVIEN ADD FOREIGN KEY(LOP) REFERENCES LOP(MALOP);
+ALTER TABLE SINHVIEN ADD FOREIGN KEY(MALOP) REFERENCES LOP(MALOP);
 ALTER TABLE GIANGKHOA ADD foreign key(MALOP) references LOP(MALOP);
  ALTER TABLE GIANGKHOA ADD foreign key(MAMON) references MONHOC(MAMON);
-select * from sinhvien;
+select * from lop;
 DROP database sinhviendb;
-DELETE FROM sinhvien;
+DELETE FROM lop;
 SET SQL_SAFE_UPDATES = 0;

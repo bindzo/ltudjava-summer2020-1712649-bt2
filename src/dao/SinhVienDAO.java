@@ -7,6 +7,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import pojo.Lop;
 import pojo.SinhVien;
 import util.HibernateUtil;
 
@@ -30,37 +31,45 @@ public class SinhVienDAO {
 	public static void main(String[] args) {
 		fromCSVToDatabase_lop();
 	}
+	@SuppressWarnings("unchecked")
 	public static void fromCSVToDatabase_lop() {
 		int count = 0;
 		List<String> filenames = new LinkedList<String>();
 		final File folder = new File("data/lop");
 		listFilesForFolder(folder, filenames);
-		List<SinhVien> sinhVienList = null;
+		Set<SinhVien> sinhVienList = null;
 		boolean kq = true;
+		Lop sinhVienSet = null;
+		String filename = null;
 		for (int i = 0; i < filenames.size(); i++) {
-			sinhVienList = readFromCSV("data/lop/" + filenames.get(i));
-			for (int j = 0; j < sinhVienList.size(); j++) {
-				kq = SinhVienDAO.themSinhVien(sinhVienList.get(j));
-				if(kq)
-				{
-					count++;
-				}
-			}
-			System.out.println("Thêm thành công "+ count + " sinh viên của lớp "+ filenames.get(i));
-			count = 0;
+			filename = filenames.get(i);
+			sinhVienSet = new Lop();
+			sinhVienList = readFromCSV("data/lop/" + filename,sinhVienSet);
+			sinhVienSet.setSinhviens(sinhVienList);
+			sinhVienSet.setMalop(filename.substring(0,filename.length()-4));
+			System.out.println(sinhVienSet.getMalop());
+//			for (int j = 0; j < sinhVienList.size(); j++) {	
+//				kq = SinhVienDAO.themSinhVien(sinhVienList.get(j));
+//				if(kq)
+//				{
+//					count++;
+//				}
+//			}
+//			System.out.println("Thêm thành công "+ count + " sinh viên của lớp "+ filenames.get(i));
+//			count = 0;
+			SinhVienDAO.themLop(sinhVienSet);
 		}
 		
 		
 	}
-	public static List<SinhVien> readFromCSV(String csvFile) {
-		List<SinhVien> sinhVienList = new ArrayList<>();
+	public static Set<SinhVien> readFromCSV(String csvFile, Lop lop) {
+		Set<SinhVien> sinhVienList = new HashSet<SinhVien>();
 		SinhVien sinhVien = null;
 		String line = "";
 		String cvsSplitBy = ",";
 
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 			line = br.readLine();
-			String lop = line.split(cvsSplitBy)[0];
 			line = br.readLine();
 			while ((line = br.readLine()) != null) {
 				String[] item = line.split(cvsSplitBy);
@@ -106,5 +115,19 @@ public class SinhVienDAO {
 		}
 		return true;
 	}
-
+	public static boolean themLop(Lop lop) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		try {
+			transaction = session.beginTransaction();
+			session.save(lop);
+			transaction.commit();
+		} catch (HibernateException ex) {
+			transaction.rollback();
+			System.err.println(ex);
+		} finally {
+			session.close();
+		}
+		return true;
+	}
 }

@@ -13,6 +13,9 @@
         <property name="hibernate.connection.show_sql">true</property>
     	<property name="hibernate.connection.format_sql">true</property>
     	<property name="hibernate.hbm2ddl.auto">update</property>
-        <mapping resource="pojo/SinhVien.hbm.xml"/>
+    	<mapping resource="pojo/SinhVien.hbm.xml"/>
+    	<mapping resource="pojo/Lop.hbm.xml"/>
+        
+        
     </session-factory>
 </hibernate-configuration>

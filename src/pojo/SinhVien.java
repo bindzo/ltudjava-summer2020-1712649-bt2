@@ -5,11 +5,11 @@ public class SinhVien {
 	private String hoten;
 	private String gioitinh;
 	private int cmnd;
-	private String lop;
+	private Lop lop;
 	private String username;
 	private String password;
 	
-	public SinhVien(int mssv, String hoten, String gioitinh, int cmnd, String lop, String usename, String password) {
+	public SinhVien(int mssv, String hoten, String gioitinh, int cmnd, Lop lop, String usename, String password) {
 		super();
 		this.mssv = mssv;
 		this.hoten = hoten;
@@ -22,10 +22,11 @@ public class SinhVien {
 	public SinhVien() {
 		super();
 	}
-	public String getLop() {
+	
+	public Lop getLop() {
 		return lop;
 	}
-	public void setLop(String lop) {
+	public void setLop(Lop lop) {
 		this.lop = lop;
 	}
 	public String getUsername() {
