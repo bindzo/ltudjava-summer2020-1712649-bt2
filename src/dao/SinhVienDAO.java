@@ -6,6 +6,7 @@ import java.util.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import pojo.Lop;
 import pojo.SinhVien;
@@ -27,11 +28,13 @@ public class SinhVienDAO {
 			}
 		}
 	}
-
+	
 	public static void main(String[] args) {
 //		themMotSinhVienVaoLop(1742006, "Trần Trung X", "Nan", 987612345, "17HCB");
 //		fromCSVToDatabase_SinhVien();
-		MonHocDAO.fromCSVToDatabase_MonHoc();
+//		MonHocDAO.fromCSVToDatabase_MonHoc();
+//		xemDanhSachSinhVien("18HCB");
+		MonHocDAO.xemDanhSachMonHoc("18HCB");
 		System.out.println("DONE");
 	}
 	@SuppressWarnings("unchecked")
@@ -85,7 +88,16 @@ public class SinhVienDAO {
 		}
 		return sinhVienList;
 	}
+	public static void xemDanhSachSinhVien(String malop) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		String hql = "FROM SinhVien SV WHERE SV.lop = \'"+malop+"\'";
+		Query<SinhVien> query = session.createQuery(hql);
+		List<SinhVien> results = query.list();
+		for (SinhVien sv:results) {
+			System.out.println(sv.getMssv());
 
+		}
+	}
 	public static SinhVien layThongTinSinhVien(int mssv) {
 		SinhVien sv = null;
 		Session session = HibernateUtil.getSessionFactory().openSession();

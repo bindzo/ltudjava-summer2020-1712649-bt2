@@ -12,6 +12,7 @@ import java.util.Set;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import pojo.Lop;
 import pojo.MonHoc;
@@ -78,5 +79,15 @@ public class MonHocDAO {
 			session.close();
 		}
 		return true;
+	}
+	public static void xemDanhSachMonHoc(String malop) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		String hql = "FROM MonHoc MH WHERE MH.lop = \'"+malop+"\'";
+		Query<MonHoc> query = session.createQuery(hql);
+		List<MonHoc> results = query.list();
+		for (MonHoc mh:results) {
+			System.out.println(mh.getTen());
+
+		}
 	}
 }
