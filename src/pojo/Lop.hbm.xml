@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="pojo">
-<class catalog="sinhviendb" name="pojo.Lop" table="LOP">
-<id name="malop" type="string">
-<column length="20" name="MALOP"/>
-<generator class="assigned"/>
-</id>
- <set name="sinhviens" table="sinhvien" inverse="true" cascade="save-update,delete" lazy="false" fetch="join">
+    <class catalog="sinhviendb" name="pojo.Lop" table="LOP">
+        <id name="malop" type="string">
+            <column length="20" name="MALOP"/>
+            <generator class="assigned"/>
+        </id>
+        <set name="sinhviens" table="sinhvien" inverse="true" cascade="save-update,delete" lazy="false" fetch="join">
             <key>
                 <column name="MALOP" not-null="true" />
             </key>
             <one-to-many class="pojo.SinhVien" />
         </set>
-</class>
+    </class>
 </hibernate-mapping>

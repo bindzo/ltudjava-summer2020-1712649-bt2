@@ -15,7 +15,7 @@
     	<property name="hibernate.hbm2ddl.auto">update</property>
     	<mapping resource="pojo/SinhVien.hbm.xml"/>
     	<mapping resource="pojo/Lop.hbm.xml"/>
-        
+        <mapping resource="pojo/MonHoc.hbm.xml"/>
         
     </session-factory>
 </hibernate-configuration>

@@ -29,10 +29,13 @@ public class SinhVienDAO {
 	}
 
 	public static void main(String[] args) {
-		fromCSVToDatabase_lop();
+//		themMotSinhVienVaoLop(1742006, "Trần Trung X", "Nan", 987612345, "17HCB");
+//		fromCSVToDatabase_SinhVien();
+		MonHocDAO.fromCSVToDatabase_MonHoc();
+		System.out.println("DONE");
 	}
 	@SuppressWarnings("unchecked")
-	public static void fromCSVToDatabase_lop() {
+	public static void fromCSVToDatabase_SinhVien() {
 		int count = 0;
 		List<String> filenames = new LinkedList<String>();
 		final File folder = new File("data/lop");
@@ -47,7 +50,6 @@ public class SinhVienDAO {
 			sinhVienList = readFromCSV("data/lop/" + filename,sinhVienSet);
 			sinhVienSet.setSinhviens(sinhVienList);
 			sinhVienSet.setMalop(filename.substring(0,filename.length()-4));
-			System.out.println(sinhVienSet.getMalop());
 //			for (int j = 0; j < sinhVienList.size(); j++) {	
 //				kq = SinhVienDAO.themSinhVien(sinhVienList.get(j));
 //				if(kq)
@@ -96,7 +98,15 @@ public class SinhVienDAO {
 		}
 		return sv;
 	}
-
+	public static boolean themMotSinhVienVaoLop(int mssv,String hoten,String gioitinh,int cmnd,String malop) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Lop lop = session.load(Lop.class, malop);
+		session.close();
+		SinhVien svmoi = new SinhVien(mssv,hoten,gioitinh,cmnd,null,null,null);
+		svmoi.setLop(lop);
+		return themSinhVien(svmoi);
+		
+	}
 	public static boolean themSinhVien(SinhVien sv) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		if (SinhVienDAO.layThongTinSinhVien(sv.getMssv()) != null) {

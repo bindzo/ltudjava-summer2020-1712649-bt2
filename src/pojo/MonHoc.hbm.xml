@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="pojo">
+    <class catalog="sinhviendb" name="pojo.MonHoc" table="monhoc">
+        <id name="mamon" type="string">
+            <column length="7" name="MAMON"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="ten" type="string">
+            <column length="50" name="TEN"/>
+        </property>
+        <property name="phong" type="string">
+            <column length="10" name="PHONG"/>
+        </property>
+        <many-to-one class="pojo.Lop" name="lop" fetch="join" lazy="false" cascade="save-update, delete">
+            <column length="20" name="MALOP" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

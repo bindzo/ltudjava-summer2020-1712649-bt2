@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="pojo">
-<class catalog="sinhviendb"
-name="pojo.SinhVien" table="sinhvien">
-<id name="mssv" type="int">
-<column length="7" name="MSSV"/>
-<generator class="assigned"/>
-</id>
-<property name="hoten" type="string">
-<column length="50" name="TEN"/>
-</property>
-<property name="gioitinh" type="string">
-<column length="10" name="GIOITINH"/>
-</property>
-<property name="cmnd" type="int">
-<column length="45" name="CMND"/>
-</property>
-<property name="username" type="string">
-<column length="45" name="USERNAME"/>
-</property>
-<property name="password" type="string">
-<column length="45" name="PASSWORD"/>
-</property>
-<many-to-one class="pojo.Lop" name="lop"
-fetch="join" lazy="false" cascade="save-update, delete">
-<column length="20" name="MALOP" not-null="true"/>
-</many-to-one>
-</class>
+    <class catalog="sinhviendb" name="pojo.SinhVien" table="sinhvien">
+        <id name="mssv" type="int">
+            <column length="7" name="MSSV"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="hoten" type="string">
+            <column length="50" name="TEN"/>
+        </property>
+        <property name="gioitinh" type="string">
+            <column length="10" name="GIOITINH"/>
+        </property>
+        <property name="cmnd" type="int">
+            <column length="45" name="CMND"/>
+        </property>
+        <property name="username" type="string">
+            <column length="45" name="USERNAME"/>
+        </property>
+        <property name="password" type="string">
+            <column length="45" name="PASSWORD"/>
+        </property>
+        <many-to-one class="pojo.Lop" name="lop" fetch="join" lazy="false" cascade="save-update, delete">
+            <column length="20" name="MALOP" not-null="true"/>
+        </many-to-one>
+    </class>
 </hibernate-mapping>
