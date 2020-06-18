@@ -31,10 +31,10 @@ public class SinhVienDAO {
 	
 	public static void main(String[] args) {
 //		themMotSinhVienVaoLop(1742006, "Trần Trung X", "Nan", 987612345, "17HCB");
-//		fromCSVToDatabase_SinhVien();
+		fromCSVToDatabase_SinhVien();
 //		MonHocDAO.fromCSVToDatabase_MonHoc();
-//		xemDanhSachSinhVien("18HCB");
-		MonHocDAO.xemDanhSachMonHoc("18HCB");
+		xemDanhSachSinhVien("18HCB");
+//		MonHocDAO.xemDanhSachMonHoc("18HCB");
 		System.out.println("DONE");
 	}
 	@SuppressWarnings("unchecked")
