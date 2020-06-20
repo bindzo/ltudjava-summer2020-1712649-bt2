@@ -2,7 +2,7 @@ package pojo;
 
 import java.util.Set;
 
-public class MonHoc {
+public class MonHoc{
 	private String mamon;
 	private String ten;
 	private String phong;

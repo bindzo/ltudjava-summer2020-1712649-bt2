@@ -1,15 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="pojo">
-    <class catalog="sinhviendb" name="pojo.MonHoc_Lop" table="monhoc_lop">
-        <many-to-one class="pojo.MonHoc" name="monhoc" fetch="join" lazy="false" cascade="save-update, delete">
-            <column length="20" name="MAMON" not-null="true"/>
-        </many-to-one>
-        <one-to-one class="pojo.SinhVien" name="sinhvien" fetch="join" lazy="false" cascade="save-update, delete">
-            <column name="MSSV" not-null="true"/>
-        </one-to-one>
-        <many-to-one class="pojo.Lop" name="lop" fetch="join" lazy="false" cascade="save-update, delete">
-            <column length="20" name="MALOP" not-null="true"/>
-        </many-to-one>
-    </class>
+	<class catalog="sinhviendb" name="pojo.MonHoc_Lop" table="monhoc_lop">
+		<composite-id>
+			<key-many-to-one class="pojo.MonHoc" name="monhoc" lazy="false" >
+				<column length="20" name="MAMON" not-null="true"  />
+			</key-many-to-one>
+			<key-many-to-one class="pojo.SinhVien" name="sinhvien" lazy="false">
+				<column name="MSSV" not-null="true" />
+			</key-many-to-one>
+		</composite-id>
+		<many-to-one class="pojo.Lop" name="lop" fetch="join" lazy="false" cascade="save-update, delete">
+			<column length="20" name="MALOP" not-null="true" />
+		</many-to-one>
+	</class>
 </hibernate-mapping>

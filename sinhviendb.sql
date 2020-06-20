@@ -38,6 +38,7 @@ ALTER TABLE MONHOC_LOP ADD foreign key(MSSV) references SINHVIEN(MSSV);
 
 select * from monhoc_lop;
 select * from lop;
+select * from monhoc;
 select * from sinhvien;
 DROP database sinhviendb;
 DELETE FROM monhoc;

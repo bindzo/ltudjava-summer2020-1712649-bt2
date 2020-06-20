@@ -38,8 +38,9 @@ public class MonHocDAO {
 			monHocList = readFromCSV_MonHoc("data/monhoc/" + filename,lop);
 			for(MonHoc mh:monHocList)
 			{
-				themMonHoc(mh);
-//				themSinhVienVaoMonHoc(mh);
+//				themMonHoc(mh);
+				themSinhVienVaoMonHoc(mh);
+				System.out.println(mh.getTen());
 			}
 		}
 	}
@@ -56,7 +57,6 @@ public class MonHocDAO {
 			while ((line = br.readLine()) != null) {
 				String[] item = line.split(cvsSplitBy);
 				monHoc = new MonHoc(item[1], item[2], item[3], lop);
-				System.out.println(monHoc);
 				monHocList.add(monHoc);
 			}
 
