@@ -3,10 +3,16 @@ package pojo;
 import java.io.Serializable;
 
 public class MonHoc_Lop implements Serializable {
+	private int stt;
 	private MonHoc monhoc;
 	private SinhVien sinhvien;
 	private Lop lop;
-
+	public int getStt() {
+		return stt;
+	}
+	public void setStt(int stt) {
+		this.stt = stt;
+	}
 	public MonHoc_Lop(MonHoc monhoc, SinhVien sinhvien, Lop lop) {
 		super();
 		this.monhoc = monhoc;

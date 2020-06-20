@@ -25,10 +25,11 @@ create table LOP (
    unique (MALOP)
 );
 create table MONHOC_LOP(
+	STT int NOT NULL AUTO_INCREMENT,
     MAMON varchar(20) not null,
 	MSSV bigint not null,
     MALOP varchar(20) not null,
-	primary key(MAMON,MSSV)
+	primary key(STT)
 );
 ALTER TABLE SINHVIEN ADD FOREIGN KEY(MALOP) REFERENCES LOP(MALOP);
 ALTER TABLE MONHOC ADD foreign key(MALOP) references LOP(MALOP);
@@ -41,6 +42,7 @@ select * from lop;
 select * from monhoc;
 select * from sinhvien;
 DROP database sinhviendb;
-DELETE FROM monhoc;
+DELETE FROM monhoc_lop;
 delete FROM lop;
 SET SQL_SAFE_UPDATES = 0;
+ALTER TABLE MONHOC_LOP AUTO_INCREMENT = 1;
