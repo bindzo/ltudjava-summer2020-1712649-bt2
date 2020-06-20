@@ -35,8 +35,10 @@ public class SinhVienDAO {
 //		MonHocDAO.fromCSVToDatabase_MonHoc();
 //		xemDanhSachSinhVien("18HCB");
 //		MonHocDAO.xemDanhSachMonHoc("18HCB");
-		MonHocDAO.themMonHoc_Lop("CTT001",1742005);
-		MonHocDAO.bangDiem();
+//		MonHocDAO.themMonHoc_Lop("CTT001",1742005);
+//		MonHocDAO.bangDiem();
+		int k = MonHocDAO.thongKeSoLuong("CTT001");
+		System.out.println(k);
 		System.out.println("DONE");
 	}
 	@SuppressWarnings("unchecked")

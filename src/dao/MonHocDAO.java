@@ -195,5 +195,44 @@ public class MonHocDAO {
 		}
 		session.close();
 	}
-	
+	public static float tinhTong(String mamon, int mssv) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		String hql = "FROM MonHoc_Lop MH WHERE MH.sinhvien = \'"+mssv+"\' AND MH.monhoc=\'"+mamon+"\'" ;
+		Query<MonHoc_Lop> query = session.createQuery(hql);
+		List<MonHoc_Lop> results = query.list();	
+		float tong = 0;
+		for(MonHoc_Lop mhl:results)
+		{
+			tong = (mhl.getGk() + mhl.getCk() + mhl.getKhac())/3;
+		}
+		return tong;
+	}
+	public static boolean dauRot(String mamon, int mssv , float tong) {
+		if(tong>=5)
+			return true;
+		else
+			return false;
+	}
+	public static int thongKeSoLuong(String mamon) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		String hql = "FROM MonHoc_Lop MH WHERE MH.monhoc=\'"+mamon+"\'" ;
+		Query<MonHoc_Lop> query = session.createQuery(hql);
+		List<MonHoc_Lop> results = query.list();	
+		int soluong = 0;
+		for(MonHoc_Lop mhl:results)
+		{
+			if(dauRot(mamon,mhl.getSinhvien().getMssv(),tinhTong(mamon,mhl.getSinhvien().getMssv()))) {
+				soluong++;
+			}
+		}
+		return soluong;
+	}
+	public static float thongKePhanTram(String mamon) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		String hql = "FROM MonHoc_Lop MH WHERE MH.monhoc=\'"+mamon+"\'" ;
+		Query<MonHoc_Lop> query = session.createQuery(hql);
+		List<MonHoc_Lop> results = query.list();
+		return thongKeSoLuong(mamon) / results.size();
+	}
+
 }

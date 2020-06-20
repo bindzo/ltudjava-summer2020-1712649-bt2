@@ -29,8 +29,12 @@ create table MONHOC_LOP(
     MAMON varchar(20) not null,
 	MSSV bigint not null,
     MALOP varchar(20) not null,
+    GK float,
+    CK float,
+    KHAC float,
 	primary key(STT)
 );
+
 ALTER TABLE SINHVIEN ADD FOREIGN KEY(MALOP) REFERENCES LOP(MALOP);
 ALTER TABLE MONHOC ADD foreign key(MALOP) references LOP(MALOP);
 ALTER TABLE MONHOC_LOP ADD foreign key(MALOP) references LOP(MALOP);
@@ -42,7 +46,7 @@ select * from lop;
 select * from monhoc;
 select * from sinhvien;
 DROP database sinhviendb;
-DELETE FROM monhoc_lop;
+DELETE FROM monhoc;
 delete FROM lop;
 SET SQL_SAFE_UPDATES = 0;
 ALTER TABLE MONHOC_LOP AUTO_INCREMENT = 1;
