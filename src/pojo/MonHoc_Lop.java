@@ -7,6 +7,25 @@ public class MonHoc_Lop implements Serializable {
 	private MonHoc monhoc;
 	private SinhVien sinhvien;
 	private Lop lop;
+	private float gk,ck,khac;
+	public float getGk() {
+		return gk;
+	}
+	public void setGk(float gk) {
+		this.gk = gk;
+	}
+	public float getCk() {
+		return ck;
+	}
+	public void setCk(float ck) {
+		this.ck = ck;
+	}
+	public float getKhac() {
+		return khac;
+	}
+	public void setKhac(float khac) {
+		this.khac = khac;
+	}
 	public int getStt() {
 		return stt;
 	}

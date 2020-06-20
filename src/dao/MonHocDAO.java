@@ -160,4 +160,40 @@ public class MonHocDAO {
 		transaction.commit();
 		session.close();
 	}
+	public static void bangDiem() {
+		List<String> filenames = new LinkedList<String>();
+		final File folder = new File("data/diem");
+		SinhVienDAO.listFilesForFolder(folder, filenames);
+		
+		String filename = null;
+		String line = "";
+		String cvsSplitBy = ",";
+		String[] firstline,mamon;
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction txn = null;
+		for (int i = 0; i < filenames.size(); i++) {
+			filename = filenames.get(i);
+			try (BufferedReader br = new BufferedReader(new FileReader("data/diem/" + filename))) {
+				line = br.readLine();
+				firstline = line.split(cvsSplitBy);
+				mamon = firstline[0].split("–");
+				line = br.readLine();
+				while ((line = br.readLine()) != null) {
+					txn = session.beginTransaction();
+					String[] item = line.split(cvsSplitBy);
+					String hql = "UPDATE MonHoc_Lop set gk = \'"+item[3]+"\', ck = \'"+item[4]+"\', khac = \'"+item[5] + "\' WHERE monhoc = \'" + mamon[1]+"\' AND sinhvien= \'" + item[1]+"\'";
+					Query query = session.createQuery(hql);
+					int result = query.executeUpdate();
+					txn.commit();
+					session.clear();
+				}
+				
+				}catch (IOException e) {
+					e.printStackTrace();
+				}
+		}
+		session.close();
+	}
+	
 }

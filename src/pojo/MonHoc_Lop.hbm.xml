@@ -15,5 +15,14 @@
 		<many-to-one class="pojo.Lop" name="lop" fetch="join" lazy="false" cascade="save-update, delete">
 			<column length="20" name="MALOP" not-null="true" />
 		</many-to-one>
+		 <property name="gk" type="float">
+            <column name="GK"/>
+        </property>
+        <property name="ck" type="float">
+            <column name="CK"/>
+        </property>
+        <property name="khac" type="float">
+            <column name="KHAC"/>
+        </property>
 	</class>
 </hibernate-mapping>
