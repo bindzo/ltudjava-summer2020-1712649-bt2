@@ -2,7 +2,7 @@ package pojo;
 
 import java.util.Set;
 
-public class MonHoc {
+public class MonHoc{
 	private String mamon;
 	private String ten;
 	private String phong;
@@ -13,12 +13,13 @@ public class MonHoc {
 	public String getMamon() {
 		return mamon;
 	}
-	public MonHoc(String mamon, String ten, String phong, Lop malop) {
+	
+	public MonHoc(String mamon, String ten, String phong, Lop lop) {
 		super();
 		this.mamon = mamon;
 		this.ten = ten;
 		this.phong = phong;
-		this.lop = malop;
+		this.lop = lop;
 	}
 	public void setMamon(String mamon) {
 		this.mamon = mamon;

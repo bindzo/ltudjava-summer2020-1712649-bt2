@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class Lop {
 	private String malop;
-	 private Set<SinhVien> sinhviens;
+	private Set<SinhVien> sinhviens;
 	public Lop() {
 		super();
 	}

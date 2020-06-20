@@ -1,6 +1,8 @@
 package pojo;
 
-public class SinhVien {
+import java.io.Serializable;
+
+public class SinhVien implements Serializable {
 	private int mssv;
 	private String hoten;
 	private String gioitinh;

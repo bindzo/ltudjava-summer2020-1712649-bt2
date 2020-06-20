@@ -17,6 +17,7 @@ import org.hibernate.query.Query;
 import pojo.Lop;
 import pojo.MonHoc;
 import pojo.SinhVien;
+import pojo.MonHoc_Lop;
 import util.HibernateUtil;
 
 public class MonHocDAO {
@@ -37,33 +38,70 @@ public class MonHocDAO {
 			monHocList = readFromCSV_MonHoc("data/monhoc/" + filename,lop);
 			for(MonHoc mh:monHocList)
 			{
-				themMonHoc(mh);
+//				themMonHoc(mh);
+				themSinhVienVaoMonHoc(mh);
+				System.out.println(mh.getTen());
 			}
 		}
-		
-		
 	}
 	public static Set<MonHoc> readFromCSV_MonHoc(String csvFile,Lop lop) {
 		Set<MonHoc> monHocList = new HashSet<MonHoc>();
-		
+//		Session session = HibernateUtil.getSessionFactory().openSession();
+
 		MonHoc monHoc = null;
 		String line = "";
 		String cvsSplitBy = ",";
-
+		
 		try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
 			line = br.readLine();
 			line = br.readLine();
 			while ((line = br.readLine()) != null) {
 				String[] item = line.split(cvsSplitBy);
+//				String malop = lop.getMalop();
+//				String hql = "FROM SinhVien SV WHERE SV.lop = \'"+malop+"\'";
+//				Query<SinhVien> query = session.createQuery(hql);
+//				List<SinhVien> results = query.list();
+//				Set<SinhVien> sinhVienSet = new HashSet<SinhVien>();
+//				for (SinhVien sv:results) {
+//					sinhVienSet.add(sv);
+//				}
 				monHoc = new MonHoc(item[1], item[2], item[3], lop);
-				System.out.println(monHoc);
 				monHocList.add(monHoc);
 			}
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+//		session.close();
 		return monHocList;
+	}
+	public static void themSinhVienVaoMonHoc(MonHoc mh) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Lop lop = session.load(Lop.class, mh.getLop().getMalop());
+		String malop = mh.getLop().getMalop();
+		String hql = "FROM SinhVien SV WHERE SV.lop = \'"+malop+"\'";
+		Query<SinhVien> query = session.createQuery(hql);
+		List<SinhVien> results = query.list();
+		MonHoc_Lop mhl= null;
+		Transaction transaction = null;
+		
+		for (SinhVien sv:results) {
+			mhl= new MonHoc_Lop();
+			mhl.setLop(lop);
+			mhl.setMonhoc(mh);
+			mhl.setSinhvien(sv);
+			try {
+				transaction = session.beginTransaction();
+				session.save(mhl);
+				
+				transaction.commit();
+				session.clear();
+			} catch (HibernateException ex) {
+				transaction.rollback();
+				System.err.println(ex);
+			}
+		}
+		session.close();
 	}
 	public static boolean themMonHoc(MonHoc mh) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -87,7 +125,39 @@ public class MonHocDAO {
 		List<MonHoc> results = query.list();
 		for (MonHoc mh:results) {
 			System.out.println(mh.getTen());
-
 		}
+	}
+	public static void xemDanhSachMonHoc_Lop(String malop,String mamon) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		String hql = "FROM MonHoc_Lop MH WHERE MH.lop = \'"+malop+"\' AND MH.monhoc=\'"+mamon+"\'" ;
+		Query<MonHoc_Lop> query = session.createQuery(hql);
+		List<MonHoc_Lop> results = query.list();
+		for (MonHoc_Lop mhl:results) {
+			System.out.println(mhl.getSinhvien().getHoten());
+		}
+	}
+	public static void xoaMonHoc_Lop(String mamon,String mssv) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction txn = session.beginTransaction();
+		String hql = "DELETE FROM MonHoc_Lop MH WHERE MH.sinhvien = \'"+mssv+"\' AND MH.monhoc=\'"+mamon+"\'" ;
+		Query query = session.createQuery(hql);
+		int result = query.executeUpdate();
+		txn.commit();
+	}
+	public static void themMonHoc_Lop(String mamon,int mssv) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		SinhVien sv = session.load(SinhVien.class, mssv);
+		Lop lop = sv.getLop();
+		MonHoc mh = session.load(MonHoc.class, mamon);
+		MonHoc_Lop mhl= null;
+		Transaction transaction = null;
+		mhl= new MonHoc_Lop();
+		mhl.setLop(lop);
+		mhl.setMonhoc(mh);
+		mhl.setSinhvien(sv);
+		transaction = session.beginTransaction();
+		session.save(mhl);
+		transaction.commit();
+		session.close();
 	}
 }
