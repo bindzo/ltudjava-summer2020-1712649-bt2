@@ -29,18 +29,18 @@ public class SinhVienDAO {
 		}
 	}
 	
-	public static void main(String[] args) {
-//		themMotSinhVienVaoLop(1742006, "Trần Trung X", "Nan", 987612345, "17HCB");
-//		fromCSVToDatabase_SinhVien();
-//		MonHocDAO.fromCSVToDatabase_MonHoc();
-//		xemDanhSachSinhVien("18HCB");
-//		MonHocDAO.xemDanhSachMonHoc("18HCB");
-//		MonHocDAO.themMonHoc_Lop("CTT001",1742005);
-//		MonHocDAO.bangDiem();
-		int k = MonHocDAO.thongKeSoLuong("CTT001");
-		System.out.println(k);
-		System.out.println("DONE");
-	}
+//	public static void main(String[] args) {
+////		themMotSinhVienVaoLop(1742006, "Trần Trung X", "Nan", 987612345, "17HCB");
+////		fromCSVToDatabase_SinhVien();
+////		MonHocDAO.fromCSVToDatabase_MonHoc();
+////		xemDanhSachSinhVien("18HCB");
+////		MonHocDAO.xemDanhSachMonHoc("18HCB");
+////		MonHocDAO.themMonHoc_Lop("CTT001",1742005);
+////		MonHocDAO.bangDiem();
+////		int k = MonHocDAO.thongKeSoLuong("CTT001");
+//		MonHocDAO.suaDiem("CTT001",1742005, 1,1, 1);
+//		System.out.println("DONE");
+//	}
 	@SuppressWarnings("unchecked")
 	public static void fromCSVToDatabase_SinhVien() {
 		int count = 0;

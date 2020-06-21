@@ -127,14 +127,12 @@ public class MonHocDAO {
 			System.out.println(mh.getTen());
 		}
 	}
-	public static void xemDanhSachMonHoc_Lop(String malop,String mamon) {
+	public static List<MonHoc_Lop> xemDanhSachMonHoc_Lop(String mamon) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		String hql = "FROM MonHoc_Lop MH WHERE MH.lop = \'"+malop+"\' AND MH.monhoc=\'"+mamon+"\'" ;
+		String hql = "FROM MonHoc_Lop MH WHERE MH.monhoc=\'"+mamon+"\'" ;
 		Query<MonHoc_Lop> query = session.createQuery(hql);
 		List<MonHoc_Lop> results = query.list();
-		for (MonHoc_Lop mhl:results) {
-			System.out.println(mhl.getSinhvien().getHoten());
-		}
+		return results;
 	}
 	public static void xoaMonHoc_Lop(String mamon,String mssv) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -194,6 +192,14 @@ public class MonHocDAO {
 				}
 		}
 		session.close();
+	}
+	public static void suaDiem(String mamon,int mssv,float gk, float ck, float khac) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction txn = session.beginTransaction();
+		String hql = "UPDATE MonHoc_Lop set gk = \'"+gk+"\', ck = \'"+ck+"\', khac = \'"+khac + "\' WHERE monhoc = \'" + mamon+"\' AND sinhvien= \'" + mssv+"\'";
+		Query query = session.createQuery(hql);
+		int result = query.executeUpdate();
+		txn.commit();
 	}
 	public static float tinhTong(String mamon, int mssv) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
