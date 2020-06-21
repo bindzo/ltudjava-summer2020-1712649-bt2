@@ -134,7 +134,7 @@ public class MonHocDAO {
 		List<MonHoc_Lop> results = query.list();
 		return results;
 	}
-	public static void xoaMonHoc_Lop(String mamon,String mssv) {
+	public static void xoaMonHoc_Lop(String mamon,int mssv) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction txn = session.beginTransaction();
 		String hql = "DELETE FROM MonHoc_Lop MH WHERE MH.sinhvien = \'"+mssv+"\' AND MH.monhoc=\'"+mamon+"\'" ;
@@ -219,6 +219,13 @@ public class MonHocDAO {
 		else
 			return false;
 	}
+	public static int soLuongSinhVien(String mamon) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		String hql = "FROM MonHoc_Lop MH WHERE MH.monhoc=\'"+mamon+"\'" ;
+		Query<MonHoc_Lop> query = session.createQuery(hql);
+		List<MonHoc_Lop> results = query.list();	
+		return results.size();
+	}
 	public static int thongKeSoLuong(String mamon) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		String hql = "FROM MonHoc_Lop MH WHERE MH.monhoc=\'"+mamon+"\'" ;
@@ -238,7 +245,7 @@ public class MonHocDAO {
 		String hql = "FROM MonHoc_Lop MH WHERE MH.monhoc=\'"+mamon+"\'" ;
 		Query<MonHoc_Lop> query = session.createQuery(hql);
 		List<MonHoc_Lop> results = query.list();
-		return thongKeSoLuong(mamon) / results.size();
+		return  ((float) thongKeSoLuong(mamon)) / results.size();
 	}
 
 }

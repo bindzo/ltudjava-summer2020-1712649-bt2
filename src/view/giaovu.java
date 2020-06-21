@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -19,8 +20,10 @@ import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class screen extends JFrame {
+public class giaovu extends JFrame {
 	DefaultTableModel tableModel;
 	private JPanel contentPane;
 	private JTextField txtMamon;
@@ -38,7 +41,7 @@ public class screen extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					screen frame = new screen();
+					giaovu frame = new giaovu();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,7 +49,11 @@ public class screen extends JFrame {
 			}
 		});
 	}
-
+	private void btnBack() {
+		file f = new file();
+		f.setVisible(true);
+		this.setVisible(false);
+	}
 	/**
 	 * Create the frame.
 	 */
@@ -110,14 +117,59 @@ public class screen extends JFrame {
 		panel.add(txtKhac);
 		
 		JButton btnThemSinhVien = new JButton("Them");
+		btnThemSinhVien.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MonHocDAO.themMonHoc_Lop(txtMamon.getText(),Integer.parseInt(txtMssv.getText()));
+				showMonHoc_Lop(txtMamon.getText());
+			}
+		});
 		btnThemSinhVien.setBounds(129, 157, 89, 23);
 		panel.add(btnThemSinhVien);
 		
 		JButton btnXoa = new JButton("Xoa");
+		btnXoa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MonHocDAO.xoaMonHoc_Lop(txtMamon.getText(),Integer.parseInt(txtMssv.getText()));
+				showMonHoc_Lop(txtMamon.getText());
+			}
+		});
 		btnXoa.setBounds(228, 157, 89, 23);
 		panel.add(btnXoa);
-		
+		JButton btnThongKeSoLuong = new JButton("TK so luong");
+		btnThongKeSoLuong.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int soluongdau = MonHocDAO.thongKeSoLuong(txtMamon.getText());
+				int soluong = MonHocDAO.soLuongSinhVien(txtMamon.getText());
+				JOptionPane.showMessageDialog(null, "So luong sinh vien dau: " + soluongdau +", So luong sinh vien rot: "+ (soluong-soluongdau));
+				 }
+		});
+		btnThongKeSoLuong.setBounds(327, 127, 89, 23);
+		panel.add(btnThongKeSoLuong);
+		JButton btnThongKePhanTram = new JButton("TK phan tram");
+		btnThongKePhanTram.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int phantram =  (int) (MonHocDAO.thongKePhanTram(txtMamon.getText()) *100);
+				
+				JOptionPane.showMessageDialog(null, "Phan tram sinh vien dau: " + phantram +"%");
+				 }
+		});
+		btnThongKePhanTram.setBounds(327, 107, 89, 23);
+		panel.add(btnThongKePhanTram);
+		JButton btnQuayLai = new JButton("Quay lai");
+		btnQuayLai.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnBack();
+				 }
+		});
+		btnQuayLai.setBounds(327, 80, 89, 23);
+		panel.add(btnQuayLai);
 		JButton btnSuaDiem = new JButton("Sua diem");
+		btnSuaDiem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MonHocDAO.suaDiem(txtMamon.getText(), Integer.parseInt(txtMssv.getText()), Float.parseFloat(txtGK.getText()), Float.parseFloat(txtCK.getText()), Float.parseFloat(txtKhac.getText()));
+				showMonHoc_Lop(txtMamon.getText());
+			}
+		});
 		btnSuaDiem.setBounds(327, 157, 89, 23);
 		panel.add(btnSuaDiem);
 		
@@ -156,7 +208,7 @@ public class screen extends JFrame {
 		table.setBounds(5, 207, 421, 131);
 		scrollPane.setViewportView(table);
 	}
-	public screen() {
+	public giaovu() {
 		Init();
 		tableModel = (DefaultTableModel) table.getModel();
 		
