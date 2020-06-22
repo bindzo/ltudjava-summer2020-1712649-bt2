@@ -11,14 +11,14 @@ public class SinhVien implements Serializable {
 	private String username;
 	private String password;
 	
-	public SinhVien(int mssv, String hoten, String gioitinh, int cmnd, Lop lop, String usename, String password) {
+	public SinhVien(int mssv, String hoten, String gioitinh, int cmnd, Lop lop, String username, String password) {
 		super();
 		this.mssv = mssv;
 		this.hoten = hoten;
 		this.gioitinh = gioitinh;
 		this.cmnd = cmnd;
 		this.lop = lop;
-		this.username = usename;
+		this.username = username;
 		this.password = password;
 	}
 	public SinhVien() {

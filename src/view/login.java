@@ -6,12 +6,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import dao.SinhVienDAO;
+import pojo.SinhVien;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
@@ -41,10 +46,32 @@ public class login extends JFrame {
 		f.setVisible(true);
 		this.setVisible(false);
 	}
+	private void loginSV(String mssv) {
+		sinhvien f = new sinhvien(mssv);
+		f.setVisible(true);
+		this.setVisible(false);
+	}
 	private static boolean isPasswordCorrect(char[] input) {
 	    boolean isCorrect = true;
 	    char[] correctPassword = { 'g', 'i', 'a', 'o', 'v', 'u' };
 
+	    if (input.length != correctPassword.length) {
+	        isCorrect = false;
+	    } else {
+	        isCorrect = Arrays.equals (input, correctPassword);
+	    }
+
+	    //Zero out the password.
+	    Arrays.fill(correctPassword,'0');
+
+	    return isCorrect;
+	}
+	public static boolean isPasswordCorrectSV(char[] input,String pass) {
+	    boolean isCorrect = true;
+	    char[] correctPassword = new char[20];
+	    for(int i=0; i<pass.length();i++){  
+	    	correctPassword[i] = pass.charAt(i);  
+	}   
 	    if (input.length != correctPassword.length) {
 	        isCorrect = false;
 	    } else {
@@ -89,11 +116,26 @@ public class login extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 char[] input = txtPass.getPassword();
-				 int k = txtUser.getText().compareTo("giaovu");
+				 boolean laSV= false;
+				 String username = null,password = null;
+				 
+				 List<SinhVien> list = SinhVienDAO.xemDanhSachTatCaSinhVien();
+				 for(SinhVien sv: list) {
+					 username = sv.getUsername();
+					 password = sv.getPassword();
+					 if(txtUser.getText().compareTo(username)==0 && isPasswordCorrectSV(input,password))
+					 {
+						 laSV = true;
+						 break;
+					 }
+				 }
 				 if(txtUser.getText().compareTo("giaovu")==0 && isPasswordCorrect(input))
 				{
 					 loginGiaoVu();
 				}
+				 else if(laSV){
+					 loginSV(username);
+				 }
 				 else {
 					 JOptionPane.showMessageDialog(null, "Sai ten dang nhap hoac mat khau");
 
@@ -106,5 +148,9 @@ public class login extends JFrame {
 		txtPass = new JPasswordField();
 		txtPass.setBounds(103, 64, 159, 20);
 		panel.add(txtPass);
+		
+		JButton btnNewButton_1 = new JButton("Doi mat khau");
+		btnNewButton_1.setBounds(4, 106, 89, 23);
+		panel.add(btnNewButton_1);
 	}
 }

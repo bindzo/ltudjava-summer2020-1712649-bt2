@@ -28,10 +28,12 @@ public class danhsachmon extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtMon;
 	private JTable table;
-
-	/**
-	 * Launch the application.
-	 */
+	
+	public void btnBack() {
+		file f = new file();
+		f.setVisible(true);
+		this.setVisible(false);
+	}
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -76,7 +78,7 @@ public class danhsachmon extends JFrame {
 		
 		txtMon = new JTextField();
 		txtMon.setToolTipText("");
-		txtMon.setBounds(10, 16, 259, 20);
+		txtMon.setBounds(10, 16, 194, 20);
 		panel.add(txtMon);
 		txtMon.setColumns(10);
 		
@@ -86,8 +88,17 @@ public class danhsachmon extends JFrame {
 				showDanhSachSinhVien(txtMon.getText());
 			}
 		});
-		btnNewButton.setBounds(279, 15, 89, 23);
+		btnNewButton.setBounds(214, 15, 86, 23);
 		panel.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Quay lai");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnBack();
+			}
+		});
+		btnNewButton_1.setBounds(310, 15, 86, 23);
+		panel.add(btnNewButton_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(20, 69, 406, 172);

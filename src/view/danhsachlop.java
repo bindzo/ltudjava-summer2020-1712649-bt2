@@ -22,14 +22,19 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
-public class dansachlop extends JFrame {
+public class danhsachlop extends JFrame {
 	DefaultTableModel tableModel;
 	DefaultTableModel tableModel2;
 	private JPanel contentPane;
 	private JTextField txtLop;
 	private JTable table;
 	private JTable table_1;
-
+	
+	public void btnBack() {
+		file f = new file();
+		f.setVisible(true);
+		this.setVisible(false);
+	}
 	/**
 	 * Launch the application.
 	 */
@@ -37,7 +42,7 @@ public class dansachlop extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					dansachlop frame = new dansachlop();
+					danhsachlop frame = new danhsachlop();
 					frame.setVisible(false);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -73,7 +78,7 @@ public class dansachlop extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public dansachlop() {
+	public danhsachlop() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 532);
@@ -101,6 +106,15 @@ public class dansachlop extends JFrame {
 		});
 		btnNewButton.setBounds(234, 10, 89, 23);
 		panel.add(btnNewButton);
+		
+		JButton btnQuayLai = new JButton("Quay lai");
+		btnQuayLai.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnBack();
+			}
+		});
+		btnQuayLai.setBounds(330, 10, 89, 23);
+		panel.add(btnQuayLai);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(5, 87, 426, 178);

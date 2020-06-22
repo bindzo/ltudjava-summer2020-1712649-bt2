@@ -125,7 +125,13 @@ public class MonHocDAO {
 		List<MonHoc> results = query.list();
 		return results;
 	}
-	
+	public static List<MonHoc_Lop> xemDiemSinhVien(String mssv) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		String hql = "FROM MonHoc_Lop MH WHERE MH.sinhvien=\'"+mssv+"\'" ;
+		Query<MonHoc_Lop> query = session.createQuery(hql);
+		List<MonHoc_Lop> results = query.list();
+		return results;
+	}
 	public static List<MonHoc_Lop> xemDanhSachMonHoc_Lop(String mamon) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		String hql = "FROM MonHoc_Lop MH WHERE MH.monhoc=\'"+mamon+"\'" ;

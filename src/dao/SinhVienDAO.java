@@ -99,6 +99,13 @@ public class SinhVienDAO {
 		List<SinhVien> results = query.list();
 		return results;
 	}
+	public static List<SinhVien> xemDanhSachTatCaSinhVien() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		String hql = "FROM SinhVien";
+		Query<SinhVien> query = session.createQuery(hql);
+		List<SinhVien> results = query.list();
+		return results;
+	}
 	public static SinhVien layThongTinSinhVien(int mssv) {
 		SinhVien sv = null;
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -115,7 +122,7 @@ public class SinhVienDAO {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Lop lop = session.load(Lop.class, malop);
 		session.close();
-		SinhVien svmoi = new SinhVien(mssv,hoten,gioitinh,cmnd,null,null,null);
+		SinhVien svmoi = new SinhVien(mssv,hoten,gioitinh,cmnd,null,Integer.toString(mssv),Integer.toString(mssv));
 		svmoi.setLop(lop);
 		return themSinhVien(svmoi);
 		
@@ -152,5 +159,13 @@ public class SinhVienDAO {
 			session.close();
 		}
 		return true;
+	}
+	public static void doiMatKhau(int mssv,String mk) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction txn = session.beginTransaction();
+		String hql = "UPDATE SinhVien set password = \'"+mk+"\' WHERE sinhvien= \'" + mssv+"\'";
+		Query query = session.createQuery(hql);
+		int result = query.executeUpdate();
+		txn.commit();
 	}
 }

@@ -40,6 +40,21 @@ public class file extends JFrame {
 		gv.setVisible(true);
 		this.setVisible(false);
 	}
+	private void btnDSLop(java.awt.event.ActionEvent evt) {
+		danhsachlop ds = new danhsachlop();
+		ds.setVisible(true);
+		this.setVisible(false);
+	}
+	private void btnDSMon(java.awt.event.ActionEvent evt) {
+		danhsachmon ds = new danhsachmon();
+		ds.setVisible(true);
+		this.setVisible(false);
+	}
+	public void btnDangXuat() {
+		login f = new login();
+		f.setVisible(true);
+		this.setVisible(false);
+	}
 	/**
 	 * Create the frame.
 	 */
@@ -100,21 +115,27 @@ public class file extends JFrame {
 		JButton btnNewButton_3_2 = new JButton("Danh sach lop");
 		btnNewButton_3_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				btnDSLop(e);
 			}
 		});
 		btnNewButton_3_2.setBounds(10, 139, 147, 56);
 		panel.add(btnNewButton_3_2);
 		
 		JButton btnNewButton_3_1_1 = new JButton("Danh sach tham gia");
+		btnNewButton_3_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnDSMon(e);
+			}
+		});
 		btnNewButton_3_1_1.setBounds(181, 139, 147, 56);
 		panel.add(btnNewButton_3_1_1);
 		
-		JButton btnNewButton_3_2_1 = new JButton("Thoi khoa bieu");
-		btnNewButton_3_2_1.setBounds(10, 208, 147, 56);
-		panel.add(btnNewButton_3_2_1);
-		
 		JButton btnNewButton_3_1_1_1 = new JButton("Dang xuat");
+		btnNewButton_3_1_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnDangXuat();
+			}
+		});
 		btnNewButton_3_1_1_1.setBounds(181, 208, 147, 56);
 		panel.add(btnNewButton_3_1_1_1);
 	}

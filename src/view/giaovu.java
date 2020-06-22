@@ -49,11 +49,12 @@ public class giaovu extends JFrame {
 			}
 		});
 	}
-	private void btnBack() {
+	public void btnBack() {
 		file f = new file();
 		f.setVisible(true);
 		this.setVisible(false);
 	}
+	
 	/**
 	 * Create the frame.
 	 */
