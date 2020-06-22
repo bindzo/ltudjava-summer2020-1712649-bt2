@@ -83,7 +83,7 @@ public class SinhVienDAO {
 			while ((line = br.readLine()) != null) {
 				String[] item = line.split(cvsSplitBy);
 				sinhVien = new SinhVien(Integer.parseInt(item[1]), item[2], item[3], Integer.parseInt(item[4]), lop,
-						null, null);
+						item[1], item[1]);
 				sinhVienList.add(sinhVien);
 			}
 
@@ -163,7 +163,7 @@ public class SinhVienDAO {
 	public static void doiMatKhau(int mssv,String mk) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction txn = session.beginTransaction();
-		String hql = "UPDATE SinhVien set password = \'"+mk+"\' WHERE sinhvien= \'" + mssv+"\'";
+		String hql = "UPDATE SinhVien set password = \'"+mk+"\' WHERE mssv= \'" +mssv+"\'";
 		Query query = session.createQuery(hql);
 		int result = query.executeUpdate();
 		txn.commit();

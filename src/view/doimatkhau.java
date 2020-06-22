@@ -41,7 +41,11 @@ public class doimatkhau extends JFrame {
 			}
 		});
 	}
-	
+	public void btnDangXuat() {
+		login f = new login();
+		f.setVisible(true);
+		this.setVisible(false);
+	}
 	public void doiMK(String mssv,String newpass){
 		SinhVienDAO.doiMatKhau(Integer.parseInt(mssv), newpass);
 	}
@@ -115,5 +119,14 @@ public class doimatkhau extends JFrame {
 		txtOld = new JPasswordField();
 		txtOld.setBounds(125, 80, 216, 20);
 		panel.add(txtOld);
+		
+		JButton btnNewButton_1 = new JButton("Quay lai");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnDangXuat();
+			}
+		});
+		btnNewButton_1.setBounds(280, 185, 136, 23);
+		panel.add(btnNewButton_1);
 	}
 }

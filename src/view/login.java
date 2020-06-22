@@ -41,6 +41,11 @@ public class login extends JFrame {
 			}
 		});
 	}
+	private void btnDMK() {
+		doimatkhau f = new doimatkhau();
+		f.setVisible(true);
+		this.setVisible(false);
+	}
 	private void loginGiaoVu() {
 		file f = new file();
 		f.setVisible(true);
@@ -68,7 +73,7 @@ public class login extends JFrame {
 	}
 	public static boolean isPasswordCorrectSV(char[] input,String pass) {
 	    boolean isCorrect = true;
-	    char[] correctPassword = new char[20];
+	    char[] correctPassword = new char[7];
 	    for(int i=0; i<pass.length();i++){  
 	    	correctPassword[i] = pass.charAt(i);  
 	}   
@@ -150,6 +155,11 @@ public class login extends JFrame {
 		panel.add(txtPass);
 		
 		JButton btnNewButton_1 = new JButton("Doi mat khau");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnDMK();
+			}
+		});
 		btnNewButton_1.setBounds(4, 106, 89, 23);
 		panel.add(btnNewButton_1);
 	}

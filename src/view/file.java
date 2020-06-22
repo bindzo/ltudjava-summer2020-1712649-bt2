@@ -76,6 +76,8 @@ public class file extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SinhVienDAO.fromCSVToDatabase_SinhVien();
+				JOptionPane.showMessageDialog(null, "Da Import danh sach lop");
+
 			}
 		});
 		btnNewButton.setHorizontalAlignment(SwingConstants.TRAILING);
