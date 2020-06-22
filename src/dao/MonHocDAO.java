@@ -118,15 +118,14 @@ public class MonHocDAO {
 		}
 		return true;
 	}
-	public static void xemDanhSachMonHoc(String malop) {
+	public static List<MonHoc> xemDanhSachMonHoc(String malop) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		String hql = "FROM MonHoc MH WHERE MH.lop = \'"+malop+"\'";
 		Query<MonHoc> query = session.createQuery(hql);
 		List<MonHoc> results = query.list();
-		for (MonHoc mh:results) {
-			System.out.println(mh.getTen());
-		}
+		return results;
 	}
+	
 	public static List<MonHoc_Lop> xemDanhSachMonHoc_Lop(String mamon) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		String hql = "FROM MonHoc_Lop MH WHERE MH.monhoc=\'"+mamon+"\'" ;

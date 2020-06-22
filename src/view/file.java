@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -69,7 +70,9 @@ public class file extends JFrame {
 		JButton btnNewButton_3 = new JButton("Import Thoi khoa bieu");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MonHocDAO.bangDiem();
+				MonHocDAO.fromCSVToDatabase_MonHoc();
+				JOptionPane.showMessageDialog(null, "Da Import thoi khoa bieu");
+
 			}
 		});
 		btnNewButton_3.setBounds(10, 72, 147, 56);
@@ -78,7 +81,8 @@ public class file extends JFrame {
 		JButton btnImportBangDiem = new JButton("Import bang diem");
 		btnImportBangDiem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MonHocDAO.fromCSVToDatabase_MonHoc();
+				MonHocDAO.bangDiem();
+				JOptionPane.showMessageDialog(null, "Da Import bang diem");
 			}
 		});
 		btnImportBangDiem.setBounds(181, 5, 147, 56);
@@ -94,6 +98,11 @@ public class file extends JFrame {
 		panel.add(btnNewButton_3_1);
 		
 		JButton btnNewButton_3_2 = new JButton("Danh sach lop");
+		btnNewButton_3_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnNewButton_3_2.setBounds(10, 139, 147, 56);
 		panel.add(btnNewButton_3_2);
 		

@@ -92,15 +92,12 @@ public class SinhVienDAO {
 		}
 		return sinhVienList;
 	}
-	public static void xemDanhSachSinhVien(String malop) {
+	public static List<SinhVien> xemDanhSachSinhVien(String malop) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		String hql = "FROM SinhVien SV WHERE SV.lop = \'"+malop+"\'";
 		Query<SinhVien> query = session.createQuery(hql);
 		List<SinhVien> results = query.list();
-		for (SinhVien sv:results) {
-			System.out.println(sv.getMssv());
-
-		}
+		return results;
 	}
 	public static SinhVien layThongTinSinhVien(int mssv) {
 		SinhVien sv = null;
