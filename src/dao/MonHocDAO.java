@@ -180,7 +180,7 @@ public class MonHocDAO {
 			try (BufferedReader br = new BufferedReader(new FileReader("data/diem/" + filename))) {
 				line = br.readLine();
 				firstline = line.split(cvsSplitBy);
-				mamon = firstline[0].split("–");
+				mamon = firstline[0].split("-");
 				line = br.readLine();
 				while ((line = br.readLine()) != null) {
 					txn = session.beginTransaction();

@@ -60,7 +60,7 @@ public class giaovu extends JFrame {
 	 */
 	public void Init() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 398);
+		setBounds(100, 100, 524, 398);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentPane(contentPane);
@@ -68,7 +68,7 @@ public class giaovu extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Quan ly mon hoc", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(5, 11, 426, 185);
+		panel.setBounds(5, 11, 491, 185);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -154,7 +154,7 @@ public class giaovu extends JFrame {
 				JOptionPane.showMessageDialog(null, "Phan tram sinh vien dau: " + phantram +"%");
 				 }
 		});
-		btnThongKePhanTram.setBounds(327, 107, 89, 23);
+		btnThongKePhanTram.setBounds(327, 95, 89, 23);
 		panel.add(btnThongKePhanTram);
 		JButton btnQuayLai = new JButton("Quay lai");
 		btnQuayLai.addActionListener(new ActionListener() {
@@ -162,7 +162,7 @@ public class giaovu extends JFrame {
 				btnBack();
 				 }
 		});
-		btnQuayLai.setBounds(327, 80, 89, 23);
+		btnQuayLai.setBounds(327, 63, 89, 23);
 		panel.add(btnQuayLai);
 		JButton btnSuaDiem = new JButton("Sua diem");
 		btnSuaDiem.addActionListener(new ActionListener() {
@@ -188,7 +188,7 @@ public class giaovu extends JFrame {
 		
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(5, 207, 421, 133);
+		scrollPane.setBounds(5, 207, 491, 133);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -196,11 +196,11 @@ public class giaovu extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"STT", "Ma mon", "MSSV", "Ho ten", "GK", "CK", "Khac", "Tong"
+				"STT", "Ma mon", "MSSV", "Ho ten", "GK", "CK", "Khac", "Tong", "Dau/Rot"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
+				String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -218,8 +218,17 @@ public class giaovu extends JFrame {
 		List<MonHoc_Lop> list = MonHocDAO.xemDanhSachMonHoc_Lop(mamon);
 		tableModel.setRowCount(0);
 		String tong = null,mm = null,mssv = null,gk=null,ck=null,khac=null,hoten=null;
+		String dau = "Dau";
 		for(MonHoc_Lop mhl: list)
 		{
+			if(MonHocDAO.tinhTong(mhl.getMonhoc().getMamon(), mhl.getSinhvien().getMssv())<5)
+			{
+				dau ="Rot";
+			}
+			else
+			{
+				dau ="Dau";
+			}
 			tong = Float.toString(MonHocDAO.tinhTong(mhl.getMonhoc().getMamon(), mhl.getSinhvien().getMssv()));
 			mm = mhl.getMonhoc().getMamon();
 			mssv = Integer.toString(mhl.getSinhvien().getMssv());
@@ -227,7 +236,7 @@ public class giaovu extends JFrame {
 			ck = Float.toString(mhl.getCk());
 			khac = Float.toString(mhl.getKhac());
 			hoten = mhl.getSinhvien().getHoten();
-			tableModel.addRow(new Object[] {tableModel.getRowCount()+1,mm,mssv,hoten,gk,ck,khac,tong});
+			tableModel.addRow(new Object[] {tableModel.getRowCount()+1,mm,mssv,hoten,gk,ck,khac,tong,dau});
 		}
 	}
 }

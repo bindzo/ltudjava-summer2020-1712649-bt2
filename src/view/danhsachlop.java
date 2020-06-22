@@ -21,6 +21,7 @@ import pojo.SinhVien;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.border.TitledBorder;
 
 public class danhsachlop extends JFrame {
 	DefaultTableModel tableModel;
@@ -29,6 +30,10 @@ public class danhsachlop extends JFrame {
 	private JTextField txtLop;
 	private JTable table;
 	private JTable table_1;
+	private JTextField txtMssv;
+	private JTextField txtTen;
+	private JTextField txtGT;
+	private JTextField txtCmnd;
 	
 	public void btnBack() {
 		file f = new file();
@@ -43,7 +48,7 @@ public class danhsachlop extends JFrame {
 			public void run() {
 				try {
 					danhsachlop frame = new danhsachlop();
-					frame.setVisible(false);
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -81,7 +86,7 @@ public class danhsachlop extends JFrame {
 	public danhsachlop() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 532);
+		setBounds(100, 100, 647, 532);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -165,6 +170,59 @@ public class danhsachlop extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("Thoi khoa bieu");
 		lblNewLabel_1.setBounds(5, 281, 287, 14);
 		contentPane.add(lblNewLabel_1);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new TitledBorder(null, "Them sinh vien", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBounds(441, 5, 182, 260);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		txtMssv = new JTextField();
+		txtMssv.setBounds(10, 31, 162, 20);
+		panel_1.add(txtMssv);
+		txtMssv.setColumns(10);
+		
+		JLabel lblNewLabel_2 = new JLabel("MSSV");
+		lblNewLabel_2.setBounds(10, 14, 49, 14);
+		panel_1.add(lblNewLabel_2);
+		
+		txtTen = new JTextField();
+		txtTen.setColumns(10);
+		txtTen.setBounds(10, 79, 162, 20);
+		panel_1.add(txtTen);
+		
+		JLabel lblNewLabel_2_1 = new JLabel("Ho ten");
+		lblNewLabel_2_1.setBounds(10, 62, 49, 14);
+		panel_1.add(lblNewLabel_2_1);
+		
+		txtGT = new JTextField();
+		txtGT.setColumns(10);
+		txtGT.setBounds(10, 127, 162, 20);
+		panel_1.add(txtGT);
+		
+		JLabel lblNewLabel_2_2 = new JLabel("Gioi tinh");
+		lblNewLabel_2_2.setBounds(10, 110, 49, 14);
+		panel_1.add(lblNewLabel_2_2);
+		
+		txtCmnd = new JTextField();
+		txtCmnd.setColumns(10);
+		txtCmnd.setBounds(10, 175, 162, 20);
+		panel_1.add(txtCmnd);
+		
+		JLabel lblNewLabel_2_3 = new JLabel("CMND");
+		lblNewLabel_2_3.setBounds(10, 158, 49, 14);
+		panel_1.add(lblNewLabel_2_3);
+		
+		JButton btnNewButton_1 = new JButton("Them");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SinhVienDAO.themMotSinhVienVaoLop(Integer.parseInt(txtMssv.getText()),txtTen.getText(), txtGT.getText(), Integer.parseInt(txtCmnd.getText()), txtLop.getText());
+				showDanhSachSinhVien(txtLop.getText());
+				showThoiKhoaBieu(txtLop.getText());
+			}
+		});
+		btnNewButton_1.setBounds(10, 206, 89, 23);
+		panel_1.add(btnNewButton_1);
 		tableModel = (DefaultTableModel) table.getModel();
 		tableModel2 = (DefaultTableModel) table_1.getModel();
 	}
